@@ -1,5 +1,9 @@
 # GFACS: Generative Flow Ant Colony Sampler
 
+**Name:** Mohammad Javad Najafi  
+**Student ID:** 403131026  
+**Course:** Metaheuristics course, Amirkabir University of Technology
+
 This repository contains the code, experiments, and associated literature for the Generative Flow Ant Colony Sampler (GFACS) project.
 
 ## Project Structure
