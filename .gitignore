@@ -7,3 +7,16 @@ lkh/
 pyvrp/
 pretrained/
 concorde/
+
+# LaTeX compilation files in the report directory
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.toc
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+report/*.lof
+report/*.lot

@@ -1,23 +1,66 @@
-# gfacs
-This repository contains the implementation code for our research paper, "[Ant Colony Sampling with GFlowNets for Combinatorial Optimization.](https://arxiv.org/abs/2403.07041)" We have developed our codes based on the [DeepACO codebase](https://github.com/henry-yeh/DeepACO).
+# GFACS: Generative Flow Ant Colony Sampler
 
-## Dependencies
-- Python 3.11.5
-- PyTorch 2.1.1
-- PyTorch Geometric 2.4.0
+This repository contains the code, experiments, and associated literature for the Generative Flow Ant Colony Sampler (GFACS) project.
 
-For the complete list of dependencies, please refer to the `requirements.txt` file.
+## Project Structure
 
-## Usage
-For the usage of the code, please refer to each folder's `README.md` file.
+The repository has been organized into four primary directories:
 
-## Citation
-If you find our work useful in your research, please consider citing our paper:
+### 1. `original_code/`
+Contains the original, unmodified source code for the GFACS algorithm as provided by the original authors (Kim et al., 2025). This includes the baseline models and training scripts for various Combinatorial Optimization problems like the Traveling Salesman Problem (TSP), Capacitated Vehicle Routing Problem (CVRP), and the Bin Packing Problem (BPP).
+
+*See `original_code/README.md` for specific execution instructions on the baselines.*
+
+### 2. `experiments/`
+Contains additional experiments and enhancements built on top of the original framework, specifically focusing on the **Bin Packing Problem (BPP)**.
+- **Included Additions**: Huber Loss stabilization, Max-Min Ant System (MMAS) pheromone clamping, Swap/2-opt Local Search refinement, and GatedGCN architecture tests.
+- **Independence**: This folder includes its own copy of the necessary source files (`bpp/`, `data/`) so experiments can be run independently using the provided `run_experiments.sh` and `run_final_experiments.sh` scripts without modifying the original code.
+- **Results**: See `experiments/experiments.md` for a detailed breakdown of the methodologies, execution times, and performance improvements over the baseline.
+
+### 3. `report/`
+Contains the LaTeX source code and compiled PDF for the revised academic paper.
+- The `edited.tex` file integrates the findings from the `experiments/` folder into the original paper content, clearly highlighting our contributions and extensions to the BPP.
+- Includes updated tables, figures, and methodology formulas.
+
+### 4. `presentation/`
+An empty directory reserved for future presentation materials (slides, demo videos, or poster files) summarizing the project's methodologies and empirical successes.
+
+## Getting Started
+
+### 1. Requirements and Data Initialization
+Due to size constraints, the raw dataset instances are not included directly in this repository. To run any experiments, you must first clone the original GFACS repository and copy its `data/` folder:
+
+```bash
+# Clone the original repository using uv
+git clone https://github.com/ai4co/gfacs.git original_gfacs
+# Copy the data folder to both execution locations
+cp -r original_gfacs/data original_code/
+cp -r original_gfacs/data experiments/
 ```
-@article{kim2024ant,
-  title={Ant Colony Sampling with GFlowNets for Combinatorial Optimization},
-  author={Kim, Minsu and Choi, Sanghyeok and Son, Jiwoo and Kim, Hyeonah and Park, Jinkyoo and Bengio, Yoshua},
-  journal={arXiv preprint arXiv:2403.07041},
-  year={2024}
-}
+
+Make sure you have `uv` installed to handle the python environments seamlessly.
+
+### 2. Running the Original Baselines
+To explore the original baselines, navigate to `original_code/`. See `original_code/README.md` for specific command configurations.
+```bash
+cd original_code/
+uv run python bpp/train.py <arguments>
 ```
+
+### 3. Running the BPP Extensions
+To replicate our specific BPP enhancements, navigate to `experiments/`. We have provided convenient bash execution scripts that reproduce the 6 BPP configurations automatically.
+
+```bash
+cd experiments/
+# Make sure the scripts are executable
+chmod +x run_experiments.sh
+chmod +x run_final_experiments.sh
+
+# Run the 1-epoch quick experiments
+./run_experiments.sh
+
+# Run the full 10-epoch rigorous experiments
+./run_final_experiments.sh
+```
+
+Logs will be generated sequentially (e.g., `experiment_results_2.log`) and then combined into a master log (e.g., `experiment_results.log`). Data analysis figures can then be regenerated using `uv run python analyze_results.py`.
