@@ -27,11 +27,22 @@ Contains the LaTeX source code and compiled PDF for the revised academic paper.
 - Includes updated tables, figures, and methodology formulas.
 
 ### 4. `presentation/`
-An empty directory reserved for future presentation materials (slides, demo videos, or poster files) summarizing the project's methodologies and empirical successes.
+Contains presentation materials summarizing the project's methodologies and empirical successes. 
+- **Video Link:** The presentation video can be accessed directly here: [GFACS Presentation Video](https://drive.google.com/file/d/1esADKYuhcOMfC9nkeJg-K-Kw3E_Q5RZF/view?usp=sharing). 
+- Note that this link is also provided in `presentation/gdrive-video-link.txt` and `presentation/README.md`.
 
 ## Getting Started
 
-### 1. Requirements and Data Initialization
+### 1. Cloning the Repository (with Video)
+Because the presentation video is large, it is tracked using Git Large File Storage (LFS). To clone this repository and correctly pull the video file, ensure you have [Git LFS](https://git-lfs.com/) installed and run:
+
+```bash
+git clone https://github.com/metaheuristic-algorithms/GFACS_MohammadJavadNajafi.git
+cd GFACS_MohammadJavadNajafi
+git lfs pull
+```
+
+### 2. Requirements and Data Initialization
 Due to size constraints, the raw dataset instances are not included directly in this repository. To run any experiments, you must first clone the original GFACS repository and copy its `data/` folder:
 
 ```bash
@@ -44,14 +55,14 @@ cp -r original_gfacs/data experiments/
 
 Make sure you have `uv` installed to handle the python environments seamlessly.
 
-### 2. Running the Original Baselines
+### 3. Running the Original Baselines
 To explore the original baselines, navigate to `original_code/`. See `original_code/README.md` for specific command configurations.
 ```bash
 cd original_code/
 uv run python bpp/train.py <arguments>
 ```
 
-### 3. Running the BPP Extensions
+### 4. Running the BPP Extensions
 To replicate our specific BPP enhancements, navigate to `experiments/`. We have provided convenient bash execution scripts that reproduce the 6 BPP configurations automatically.
 
 ```bash
